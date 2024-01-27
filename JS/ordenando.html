@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> 
+    <script src="Ordenando.js"></script>
+    <title>Ordenação e Mistura de Vetor</title>
+
+    <style>
+        footer {
+    position: fixed;
+    width: 100%;
+    bottom:0;
+}
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+
+<!-- Itens do menu -->
+                    
+        <nav class="navbar  navbar-expand-lg navbar-dark bg-dark">
+                
+            <ul class="navbar-nav">
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="./ordenando.html">Ordenação</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="./Receitas.html">Receitas</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="./Usuario.html">Usuários VueJs</a>
+                </li>
+                
+            </ul>
+                
+        </nav>
+                  
+    </header>
+
+        <h2 class="title" style="text-align: center;">
+            Operações no Vetor</h2>
+
+            <h5 style="text-align: center;">
+                <label for="algoritmoSelect">Escolha um algoritmo:</label>
+            </h5>
+    
+    <section style="text-align: center;">
+
+        <input type="number" id="valor" placeholder="Digite um número">
+        <button onclick="add()">Adicionar</button>
+    
+        <select id="algoritmoSelect">
+            <option value="bubbleSort">Bubble Sort</option>
+            <option value="selectionSort">Selection Sort</option>
+            <option value="quickSort" selected>Quick Sort</option>
+        </select>
+    
+        <button onclick="ordenar()">Ordenar</button>
+        <button onclick="misturar()">Misturar</button>
+
+    </section>
+
+    <div class="container mt-5">
+        <div class="row justify-content-md-center">
+          <div class="col col-lg-2">
+            <ul id="valores"></ul>
+          </div>
+        </div>
+    </div>
+
+<!-- Rodapé -->
+
+<footer class="bg-dark text-white text-center p-1">
+
+    <p>&copy; 2024 Dev Bruno Sampaio </p>
+  
+  </footer>
+  
+<script>
+
+        const valoresList = document.getElementById('valores');
+        const valorInput = document.getElementById('valor');
+        const algoritmoSelect = document.getElementById('algoritmoSelect');
+
+        function add() {
+            const inputValue = valorInput.value;
+            // Verificar se o valor é um número válido
+            if (!isNaN(inputValue) && inputValue !== '') {
+                const node = document.createElement('li');
+                const textNode = document.createTextNode(inputValue);
+                node.appendChild(textNode);
+                valoresList.appendChild(node);
+                valorInput.value = ''; // Limpar o campo de entrada
+            } else {
+                alert('Por favor, insira um número válido.');
+            }
+        }
+
+            function ordenar() {
+                const valores = Array.from(valoresList.children).map(item => eval(item.innerHTML));
+                const algoritmo = algoritmoSelect.value;
+    
+                // Escolher o algoritmo de ordenação
+                let sortedValores;
+                if (algoritmo === 'bubbleSort') {
+                    sortedValores = bubbleSort(valores);
+                } else if (algoritmo === 'selectionSort') {
+                    sortedValores = selectionSort(valores);
+                } else if (algoritmo === 'quickSort') {
+                    sortedValores = quickSort(valores);
+                }
+    
+                // Atualizar a lista com os valores ordenados
+                valoresList.innerHTML = sortedValores.map(value => `<li>${value}</li>`).join('');
+            }
+    
+            function misturar() {
+                const valores = Array.from(valoresList.children).map(item => eval(item.innerHTML));
+    
+                // Aplicar a função shuffle ao vetor
+                shuffle(valores, 5);
+    
+                // Atualizar a lista com os valores embaralhados
+                valoresList.innerHTML = valores.map(value => `<li>${value}</li>`).join('');
+            }
+
+</script>
+
+</body>
+</html>

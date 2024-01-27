@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> 
+    <title>Receitas</title>
+
+  <style>
+
+    .container-fluid{
+      justify-content: space-around;
+      margin-top: 50px;
+    }
+    .card{
+      border: 1px solid black;
+      border-radius: 8px;
+      padding: 16px;
+      width: 220px;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+  </style>
+
+</head>
+
+<body class="bg-warning" onload="preencheCatalogo()">
+  
+  <header>
+
+<!-- Itens do menu -->
+                        
+    <nav class="navbar  navbar-expand-lg navbar-dark bg-dark">
+                    
+        <ul class="navbar-nav">
+                    
+            <li class="nav-item">
+              <a class="nav-link" href="./ordenando.html">Ordenação</a>
+            </li>
+                    
+            <li class="nav-item">
+              <a class="nav-link" href="./Receitas.html">Receitas</a>
+            </li>
+                    
+            <li class="nav-item">
+              <a class="nav-link" href="./Usuario.html">Usuários VueJs</a>
+            </li>
+                    
+        </ul>
+                    
+    </nav>
+                      
+  </header>
+
+
+    <div class="Titulo" style="text-align: center;">
+
+        <h1>Receitas</h1>
+        
+    </div>
+
+    <main class="container-fluid  d-flex flex-wrap" id="pnlCatalogo">
+    
+<!-- Os cards de receitas serão adicionados aqui -->
+
+    </main>
+
+<!-- Rodapé -->
+
+ <footer class="bg-dark text-white text-center p-1 mt-2">
+
+  <p>&copy; 2024 Dev Bruno Sampaio </p>
+
+</footer>
+
+<script>
+
+    const receitas = [
+      
+    {
+      titulo: "Bolo de Cenoura",
+            
+      imagem:"imagem/bolo-de-cenoura.jpg",
+            
+      ingredientes: ["1/2 xícara (chá) de óleo","4 ovos","2 e 1/2 xícaras (chá) de farinha de trigo","3 cenouras médias raladas",
+        "2 xícaras (chá) de açúcar","1 colher (sopa) de fermento em pó","1 colher (sopa) de manteiga","1 xícara (chá) de açúcar",
+        "3 colheres (sopa) de chocolate em pó","1 xícara (chá) de leite"],
+            
+      modo: "Modo de preparo:",
+            
+      preparo: "Em um liquidificador, adicione a cenoura, os ovos e o óleo, depois misture. Acrescente o açúcar e bata novamente por 5 minutos. Em uma tigela ou na batedeira, adicione a farinha de trigo e depois misture novamente. Acrescente o fermento e misture lentamente com uma colher. Asse em um forno preaquecido a 180° C por aproximadamente 40 minutos. Despeje em uma tigela a manteiga, o chocolate em pó, o açúcar e o leite, depois misture. Leve a mistura ao fogo e continue misturando até obter uma consistência cremosa, depois despeje a calda por cima do bolo."
+    },
+    {
+      titulo: "Lasanha à Bolonhesa",
+            
+      imagem:"imagem/Lasanha.jpg",
+            
+      ingredientes: ["500 g de massa de lasanha","2 caixas de creme de leite","3 colheres de farinha de trigo","500 g de mussarela",
+        "2 copos de leite","3 colheres de óleo","3 dentes de alho amassados","500 g de carne moída","3 colheres de manteiga","500 g de presunto",
+        "sal a gosto","1 cebola ralada","1 caixa de molho de tomate","1 pacote de queijo ralado"],
+           
+      modo: "Modo de preparo:",
+            
+      preparo: "Cozinhe a massa segundo as orientações do fabricante, despeje em um refratário com água gelada para não grudar e reserve. Refogue o alho, a cebola, a carne moída, o molho de tomate, deixe cozinhar por 3 minutos e reserve. Derreta a margarina, coloque as 3 colheres de farinha de trigo e mexa. Despeje o leite aos poucos e continue mexendo. Por último, coloque o creme de leite, mexa por 1 minuto e desligue o fogo. Despeje uma parte do molho à bolonhesa em um refratário, a metade da massa, a metade do presunto, a metade da mussarela, todo o molho branco e o restante da massa. Repita as camadas até a borda do recipiente. Finalize com o queijo ralado e leve ao forno alto (220° C), preaquecido, por cerca de 20 minutos."
+    },
+    {
+      titulo: "Pizza",
+            
+      imagem:"imagem/Pizza.jpg",
+            
+      ingredientes: ["250 g de trigo","1 colher de chá de sal","1 ovo","50 ml de leite","2 colheres cha de fermento biológico fresco",
+        "1 colher de chá de açúcar","1 colher sopa de manteiga derretida"],
+           
+      modo: "Modo de preparo:",
+            
+      preparo: "Aqueça o leite 30 segundos no micro-ondas. Em uma vasilha misture o leite, o fermento, 2 colheres de chá de trigo e o açúcar. Cubra com um pano e deixe descansar por 20 minutos. Adicione o ovo e a manteiga derretida e misture bem. Adicione o trigo aos poucos até obter uma massa que não gruda na mão. Deixe descançar por 15 minutos. Divida a massa em 2 partes, faça 2 bolinhas, abra com o rolo até ficar redonda e fina, coloque na forma untada e pronto. Pode fazer recheio salgado ou doce."
+    },
+
+    // Adicione mais receitas conforme necessário
+
+];
+    
+  function getListaIngredientes(ingredientes) {
+    return `<ul>${ingredientes.map(ingrediente => `<li>${ingrediente}</li>`).join('')}</ul>`;
+}
+    
+  function getCard(receita) {
+    return `
+      <div class="card" style="width: 441px;">
+        <img src="${receita.imagem}" alt="${receita.titulo}" class="card-img-top">
+            <div class="card-body">
+              <h3 class="card-title">${receita.titulo}</h3>
+                <div class="card-text">
+                  ${getListaIngredientes(receita.ingredientes)}
+                  <hr>
+                  <h5 class="title">${receita.modo}</h5>
+                  <p>${receita.preparo}</p>
+              </div>
+            </div>
+      </div>`;
+}
+    
+  function preencheCatalogo() {
+    const pnlCatalogo = document.getElementById('pnlCatalogo');
+      pnlCatalogo.innerHTML = receitas.map(receita => getCard(receita)).join('');
+}
+    
+  window.onload = preencheCatalogo;
+        
+</script>
+
+</body>
+</html>
